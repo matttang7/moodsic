@@ -16,10 +16,22 @@ import android.widget.Toast;
 import com.example.moodsic.R;
 import android.os.Bundle;
 
+import java.net.HttpURLConnection;
+import java.net.URI;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.net.*;
+import java.io.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 // Your directory with files to be deleted
                 String sdcard = Environment.getExternalStorageDirectory() + "/Android/data/com.example.moodsic/files/Pictures/";
                 // go to your directory
-                File fileList = new File( sdcard );
+                File fileList = new File(sdcard);
                 //check if dir is not null
-                if (fileList != null){
+                if (fileList != null) {
                     // so we can list all files
                     File[] filenames = fileList.listFiles();
                     // loop through each file and delete
-                    for (File tmpf : filenames){
+                    for (File tmpf : filenames) {
                         System.out.println("REACHED");
                         System.out.println(tmpf);
                         tmpf.delete();
@@ -143,10 +155,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Show toast
     public void buttonClicked(MenuItem item) {
-        Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     String currentPhotoPath;
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -187,4 +200,61 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    private void jihoon() throws ProtocolException, MalformedURLException {
+//        // Replace <Subscription Key> with your valid subscription key.
+//        final String subscriptionKey = "048296827ecd4c0a8c98ad2cb189363b";
+//
+//        final String uriBase =
+//                "https://jihoonk2.cognitiveservices.azure.com/face/v1.0/detect";
+//
+//        final String imageWithFaces =
+//                "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
+//
+//        final String faceAttributes =
+//                "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+//
+//
+//        URL url = new URL(uriBase);
+//        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//        con.setRequestMethod("GET");
+//
+//
+//        try {
+//            // Prepare the URI for the REST API call.
+//            URI uri = builder.build();
+//            HttpPost request = new HttpPost(uri);
+//
+//            // Request headers.
+//            request.setHeader("Content-Type", "application/json");
+//            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+//
+//            // Request body.
+//            StringEntity reqEntity = new StringEntity(imageWithFaces);
+//            request.setEntity(reqEntity);
+//
+//            // Execute the REST API call and get the response entity.
+//            HttpResponse response = httpclient.execute(request);
+//            HttpEntity entity = response.getEntity();
+//
+//
+//            if (entity != null) {
+//                // Format and display the JSON response.
+//                System.out.println("JIHOON REST Response:\n");
+//
+//                String jsonString = EntityUtils.toString(entity).trim();
+//                if (jsonString.charAt(0) == '[') {
+//                    JSONArray jsonArray = new JSONArray(jsonString);
+//                    System.out.println(jsonArray.toString(2));
+//                } else if (jsonString.charAt(0) == '{') {
+//                    JSONObject jsonObject = new JSONObject(jsonString);
+//                    System.out.println(jsonObject.toString(2));
+//                } else {
+//                    System.out.println(jsonString);
+//                }
+//            }
+//        } catch (Exception e) {
+//            // Display error message.
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }
