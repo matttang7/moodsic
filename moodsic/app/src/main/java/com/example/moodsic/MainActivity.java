@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         final Button happy = findViewById(R.id.happybutton);
         final Button sad = findViewById(R.id.sadbutton);
         final Button angry = findViewById(R.id.angrybutton);
+        final Button picture = findViewById(R.id.picture);
+        picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+            }
+        });
 
         happy.setOnClickListener(new View.OnClickListener() {
             @Override
