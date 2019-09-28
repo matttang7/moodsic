@@ -7,11 +7,12 @@
     android:background="@android:color/holo_blue_light"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="120dp"
         android:gravity="center"
         android:text="Moodsic"
         android:textSize="48sp"
@@ -39,7 +40,7 @@
         android:id="@+id/preferences"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="28dp"
         android:gravity="center"
         android:text="Preferences"
         android:textSize="36sp"
