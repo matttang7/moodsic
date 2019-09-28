@@ -43,6 +43,7 @@ import com.microsoft.projectoxford.face.contract.*;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         setContentView(R.layout.activity_main);
 
 
@@ -65,9 +65,8 @@ public class MainActivity extends AppCompatActivity {
         final Button worried = findViewById(R.id.btn_worried);
         final Button pause = findViewById(R.id.pause);
         final Button picture = findViewById(R.id.picture);
-<<<<<<< HEAD
-=======
         final int[] length = {0};
+        String s = getEmotion();
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
->>>>>>> 708a8b53b92b94f6f3aa2ce5668053ea89215e55
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
         final String faceAttributes =
                 "emotion";
-
+        System.out.println("CALLED");
 
 
 
@@ -263,6 +261,9 @@ public class MainActivity extends AppCompatActivity {
 
             URL url = new URL(uriBase);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            System.out.println("REACHED url");
+            System.out.println(con);
+            System.out.println(url);
             con.setRequestMethod("POST");
 
             // Request parameters. All of them are optional.
@@ -271,16 +272,20 @@ public class MainActivity extends AppCompatActivity {
             parameters.put("returnFaceLandmarks","false");
             parameters.put("returnFaceAttributes", faceAttributes);
 
+            System.out.println("REACHED 1");
             con.setDoOutput(true);
+            System.out.println(con.getOutputStream());
             DataOutputStream out = new DataOutputStream(con.getOutputStream());
             out.writeBytes(getParamsString(parameters));
-
+            System.out.println("REACHED 2");
             // Request headers.
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
-
+            System.out.println("REACHED 3");
             // Request body.
             byte[] outputInBytes = imageWithFaces.getBytes("UTF-8");
+            System.out.println("REACHED CON");
+            //system.out.println(con);
             OutputStream os = con.getOutputStream();
             os.write(outputInBytes);
             os.close();
@@ -295,9 +300,12 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("JIHOON REST Response:\n");
 
                 ByteArrayOutputStream baos = (ByteArrayOutputStream)os;
+                System.out.println("jsonstring");
                 String jsonString = new String(baos.toByteArray()).trim();
+                System.out.println(jsonString);
                 JSONObject reader = new JSONObject(jsonString);
                 double anger = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("anger");
+                System.out.print("ANGER");
                 System.out.print(anger);
 //                if (jsonString.charAt(0) == '[') {
 //                    JSONArray jsonArray = new JSONArray(jsonString);
@@ -314,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             // Display error message.
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
 
         return "";
