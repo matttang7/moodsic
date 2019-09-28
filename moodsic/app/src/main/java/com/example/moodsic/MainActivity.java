@@ -28,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button happy = findViewById(R.id.happybutton);
-        final Button sad = findViewById(R.id.sadbutton);
-        final Button angry = findViewById(R.id.angrybutton);
+        final Button happy = findViewById(R.id.btn_happy);
+        final Button sad = findViewById(R.id.btn_sad);
+        final Button angry = findViewById(R.id.btn_angry);
+        final Button worried = findViewById(R.id.btn_worried);
+
         final Button picture = findViewById(R.id.picture);
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         buttonClicked(item);
-                        happy.setText(item.getTitle());
+                        happy.setText("Happy\n" + item.getTitle());
                         return true;
                     }
                 });
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         buttonClicked(item);
-                        sad.setText(item.getTitle());
+                        sad.setText("Sad\n" + item.getTitle());
                         return true;
                     }
                 });
@@ -93,7 +95,28 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         buttonClicked(item);
-                        angry.setText(item.getTitle());
+                        angry.setText("Angry\n" + item.getTitle());
+                        return true;
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+        });
+
+        worried.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(MainActivity.this, worried);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        buttonClicked(item);
+                        worried.setText("Worried\n" + item.getTitle());
                         return true;
                     }
                 });
