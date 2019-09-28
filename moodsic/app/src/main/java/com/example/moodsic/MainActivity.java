@@ -37,6 +37,9 @@ import java.net.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import com.microsoft.projectoxford.face.*;
+import com.microsoft.projectoxford.face.contract.*;
+
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         final Button worried = findViewById(R.id.btn_worried);
         final Button pause = findViewById(R.id.pause);
         final Button picture = findViewById(R.id.picture);
+<<<<<<< HEAD
+=======
         final int[] length = {0};
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+>>>>>>> 708a8b53b92b94f6f3aa2ce5668053ea89215e55
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 popup.show();//showing popup menu
+                String currentEmotion = getEmotion();
+
             }
         });
 
@@ -233,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void jihoon() {
+    private String getEmotion() {
         //Replace <Subscription Key> with your valid subscription key.
         final String subscriptionKey = "048296827ecd4c0a8c98ad2cb189363b";
 
@@ -244,18 +252,22 @@ public class MainActivity extends AppCompatActivity {
                 "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
 
         final String faceAttributes =
-                "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+                "emotion";
 
 
-        URL url = new URL(uriBase);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
+
+
 
 
         try {
+
+            URL url = new URL(uriBase);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+
             // Request parameters. All of them are optional.
             Map<String, String> parameters = new HashMap<>();
-            parameters.put("returnFaceId", "true");
+            parameters.put("returnFaceId", "false");
             parameters.put("returnFaceLandmarks","false");
             parameters.put("returnFaceAttributes", faceAttributes);
 
@@ -282,22 +294,30 @@ public class MainActivity extends AppCompatActivity {
                 // Format and display the JSON response.
                 System.out.println("JIHOON REST Response:\n");
 
+                ByteArrayOutputStream baos = (ByteArrayOutputStream)os;
+                String jsonString = new String(baos.toByteArray()).trim();
+                JSONObject reader = new JSONObject(jsonString);
+                double anger = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("anger");
+                System.out.print(anger);
+//                if (jsonString.charAt(0) == '[') {
+//                    JSONArray jsonArray = new JSONArray(jsonString);
+//                    System.out.println(jsonArray.toString(2));
+//                } else if (jsonString.charAt(0) == '{') {
+//                    JSONObject jsonObject = new JSONObject(jsonString);
+//                    System.out.println(jsonObject.toString(2));
+//                } else {
+//                    System.out.println(jsonString);
+//                }
 
-                String jsonString = OutputStream.toString(os).trim();
-                if (jsonString.charAt(0) == '[') {
-                    JSONArray jsonArray = new JSONArray(jsonString);
-                    System.out.println(jsonArray.toString(2));
-                } else if (jsonString.charAt(0) == '{') {
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    System.out.println(jsonObject.toString(2));
-                } else {
-                    System.out.println(jsonString);
-                }
             }
+
+
         } catch (Exception e) {
             // Display error message.
             System.out.println(e.getMessage());
         }
+
+        return "";
     }
 
     public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException{
