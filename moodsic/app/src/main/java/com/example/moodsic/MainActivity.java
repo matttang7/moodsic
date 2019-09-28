@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -65,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
         final Button worried = findViewById(R.id.btn_worried);
         final Button pause = findViewById(R.id.pause);
         final Button picture = findViewById(R.id.picture);
-<<<<<<< HEAD
-=======
+
         final int[] length = {0};
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
->>>>>>> 708a8b53b92b94f6f3aa2ce5668053ea89215e55
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 popup.show();//showing popup menu
-                String currentEmotion = getEmotion();
+//                String currentEmotion = getEmotion();
 
             }
         });
@@ -254,11 +253,6 @@ public class MainActivity extends AppCompatActivity {
         final String faceAttributes =
                 "emotion";
 
-
-
-
-
-
         try {
 
             URL url = new URL(uriBase);
@@ -271,7 +265,10 @@ public class MainActivity extends AppCompatActivity {
             parameters.put("returnFaceLandmarks","false");
             parameters.put("returnFaceAttributes", faceAttributes);
 
+            Log.d("JIHOON", "con = " + con);
+
             con.setDoOutput(true);
+
             DataOutputStream out = new DataOutputStream(con.getOutputStream());
             out.writeBytes(getParamsString(parameters));
 
@@ -281,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Request body.
             byte[] outputInBytes = imageWithFaces.getBytes("UTF-8");
+            System.out.println(con);
             OutputStream os = con.getOutputStream();
             os.write(outputInBytes);
             os.close();
@@ -289,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
 //            HttpResponse response = httpclient.execute(request);
 //            HttpEntity entity = response.getEntity();
 
-
+            System.out.println("Line 290 reached");
             if (os != null) {
                 // Format and display the JSON response.
                 System.out.println("JIHOON REST Response:\n");
@@ -298,7 +296,26 @@ public class MainActivity extends AppCompatActivity {
                 String jsonString = new String(baos.toByteArray()).trim();
                 JSONObject reader = new JSONObject(jsonString);
                 double anger = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("anger");
-                System.out.print(anger);
+                double fear = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("fear");
+                double happiness = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("happiness");
+                double sadness = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("sadness");
+
+                double[] emotions = {anger, fear, happiness, sadness};
+                double temp = anger;
+                int val = 0;
+                for (int i = 0; i < 4; i++){
+                    if (emotions[i] > temp) {
+                        temp = emotions[i];
+                        val = i;
+                    }
+                }
+
+                if (val == 0) return "angry";
+                else if (val == 1) return "worried";
+                else if (val == 2) return "happy";
+                else return "sad";
+
+//                System.out.print(anger);
 //                if (jsonString.charAt(0) == '[') {
 //                    JSONArray jsonArray = new JSONArray(jsonString);
 //                    System.out.println(jsonArray.toString(2));
@@ -334,5 +351,6 @@ public class MainActivity extends AppCompatActivity {
                 ? resultString.substring(0, resultString.length() - 1)
                 : resultString;
     }
+
 }
 
