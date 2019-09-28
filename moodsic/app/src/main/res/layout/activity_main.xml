@@ -57,6 +57,8 @@
         android:layout_margin="10dp"
         >
 
+
+        <!--   Design inspiration from https://www.google.com/search?q=android+ui&safe=active&sxsrf=ACYBGNRcX3ICRZ4WyxMkmboI8l_NEm8CVw:1569649946265&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjM3t_b6fLkAhUlT98KHUMPA-QQ_AUIEigB&biw=1356&bih=903&dpr=2#imgrc=2l9M240coKC6OM:     -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
