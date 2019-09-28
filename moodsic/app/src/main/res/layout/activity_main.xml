@@ -4,112 +4,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/Title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="214dp"
-        android:gravity="start"
+        android:layout_marginBottom="200dp"
+        android:gravity="center"
         android:text="Moodsic"
-        android:textSize="64sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
+
+    <Button
+        android:id="@+id/picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
+        android:gravity="center"
+        android:text="Picture"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/preferences"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        app:layout_constraintVertical_bias="0.6"></Button>
 
     <TextView
         android:id="@+id/preferences"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:layout_marginBottom="64dp"
+        android:gravity="center"
         android:text="Preferences"
-        android:textSize="64sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="@+id/scrollView3"></TextView>
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title">
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        android:layout_margin="10dp"
+        >
 
+
+        <!--   Design inspiration from https://www.google.com/search?q=android+ui&safe=active&sxsrf=ACYBGNRcX3ICRZ4WyxMkmboI8l_NEm8CVw:1569649946265&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjM3t_b6fLkAhUlT98KHUMPA-QQ_AUIEigB&biw=1356&bih=903&dpr=2#imgrc=2l9M240coKC6OM:     -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_alignParentLeft="true"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_happy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="@android:dimen/thumbnail_width"
+                    android:height="@android:dimen/thumbnail_width"
                     android:text="Happy"
-                    android:layout_weight="1"
-                    android:id="@+id/heppy"
-                    android:textSize="32sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="fill_parent">
-                </TextView>
-                <Button android:text="Song"
-                    android:id="@+id/happybutton"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="80dp">
-                </Button>
-            </LinearLayout>
+                    android:background="@android:color/holo_orange_dark"/>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_alignParentLeft="true"
+                <Button
+                    android:id="@+id/btn_sad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="@android:dimen/thumbnail_width"
+                    android:height="@android:dimen/thumbnail_width"
                     android:text="Sad"
-                    android:layout_weight="1"
-                    android:id="@+id/sad"
-                    android:textSize="32sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="fill_parent">
-                </TextView>
-                <Button android:text="Song"
-                    android:id="@+id/sadbutton"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="80dp">
-                </Button>
+                    android:background="@android:color/darker_gray"
+                    />
+
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_alignParentLeft="true"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_angry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="@android:dimen/thumbnail_width"
+                    android:height="@android:dimen/thumbnail_width"
                     android:text="Angry"
-                    android:layout_weight="1"
-                    android:id="@+id/angry"
-                    android:textSize="32sp"
+                    android:background="@android:color/holo_red_light"/>
+
+                <Button
+                    android:id="@+id/btn_worried"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="fill_parent">
-                </TextView>
-                <Button android:text="Song"
-                    android:id="@+id/angrybutton"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="80dp">
-                </Button>
+                    android:width="@android:dimen/thumbnail_width"
+                    android:height="@android:dimen/thumbnail_width"
+                    android:text="Worried"
+                    android:background="@android:color/holo_purple"
+                    />
             </LinearLayout>
+
+
+            <!--            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:layout_width="fill_parent"-->
+            <!--                android:layout_height="fill_parent"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_alignParentLeft="true"-->
+            <!--                    android:text="Happy"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:id="@+id/heppy"-->
+            <!--                    android:textSize="32sp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="fill_parent">-->
+            <!--                </TextView>-->
+            <!--                <Button android:text="Song"-->
+            <!--                    android:id="@+id/happybutton"-->
+            <!--                    android:textSize="18dp"-->
+            <!--                    android:layout_marginTop="10dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="80dp">-->
+            <!--                </Button>-->
+            <!--            </LinearLayout>-->
+
+            <!--            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:layout_width="fill_parent"-->
+            <!--                android:layout_height="fill_parent"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_alignParentLeft="true"-->
+            <!--                    android:text="Sad"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:id="@+id/sad"-->
+            <!--                    android:textSize="32sp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="fill_parent">-->
+            <!--                </TextView>-->
+            <!--                <Button android:text="Song"-->
+            <!--                    android:id="@+id/sadbutton"-->
+            <!--                    android:textSize="18dp"-->
+            <!--                    android:layout_marginTop="10dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="80dp">-->
+            <!--                </Button>-->
+            <!--            </LinearLayout>-->
+
+            <!--            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:layout_width="fill_parent"-->
+            <!--                android:layout_height="fill_parent"-->
+            <!--                >-->
+            <!--                <TextView-->
+            <!--                    android:layout_alignParentLeft="true"-->
+            <!--                    android:text="Angry"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:id="@+id/angry"-->
+            <!--                    android:textSize="32sp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="fill_parent">-->
+            <!--                </TextView>-->
+            <!--                <Button android:text="Song"-->
+            <!--                    android:id="@+id/angrybutton"-->
+            <!--                    android:textSize="18dp"-->
+            <!--                    android:layout_marginTop="10dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_width="80dp">-->
+            <!--                </Button>-->
+            <!--            </LinearLayout>-->
+
+
         </LinearLayout>
     </ScrollView>
 
