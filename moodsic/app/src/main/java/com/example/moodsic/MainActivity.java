@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Open the site corresponding to the Chrome extension
+    // Show toast
     public void buttonClicked(MenuItem item) {
         Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
     }
