@@ -7,12 +7,110 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginBottom="214dp"
+        android:gravity="start"
+        android:text="Moodsic"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="Preferences"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintStart_toStartOf="@+id/scrollView3"></TextView>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:text="Happy"
+                    android:layout_weight="1"
+                    android:id="@+id/heppy"
+                    android:textSize="32sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+                </TextView>
+                <Button android:text="Song"
+                    android:id="@+id/happybutton"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp">
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:text="Sad"
+                    android:layout_weight="1"
+                    android:id="@+id/sad"
+                    android:textSize="32sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+                </TextView>
+                <Button android:text="Song"
+                    android:id="@+id/sadbutton"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp">
+                </Button>
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:text="Angry"
+                    android:layout_weight="1"
+                    android:id="@+id/angry"
+                    android:textSize="32sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+                </TextView>
+                <Button android:text="Song"
+                    android:id="@+id/angrybutton"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp">
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
