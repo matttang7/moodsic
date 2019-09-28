@@ -16,10 +16,25 @@ import android.widget.Toast;
 import com.example.moodsic.R;
 import android.os.Bundle;
 
+import java.lang.Object;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.apache.http.util.EntityUtils;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.net.*;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        jihoon();
 
         final Button happy = findViewById(R.id.btn_happy);
         final Button sad = findViewById(R.id.btn_sad);
@@ -190,90 +203,85 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK &&
-                data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        getContentResolver(), uri);
-                ImageView imageView = findViewById(R.id.imageView1);
-                imageView.setImageBitmap(bitmap);
+    private void jihoon() {
+        //Replace <Subscription Key> with your valid subscription key.
+        final String subscriptionKey = "048296827ecd4c0a8c98ad2cb189363b";
 
-                // Comment out for tutorial
-                detectAndFrame(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        final String uriBase =
+                "https://jihoonk2.cognitiveservices.azure.com/face/v1.0/detect";
 
-    }
+        final String imageWithFaces =
+                "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
 
-    public void jihoon() {
-            // Replace <Subscription Key> with your valid subscription key.
-            private static final String subscriptionKey = "<Subscription Key>";
-
-            private static final String uriBase =
-                    "https://<My Endpoint String>.com/face/v1.0/detect";
-
-            private static final String imageWithFaces =
-                    "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
-
-            private static final String faceAttributes =
-                    "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
+        final String faceAttributes =
+                "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise";
 
 
-        HttpClient httpclient = HttpClientBuilder.create().build();
+        URL url = new URL(uriBase);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
 
-        try
-        {
-            URIBuilder builder = new URIBuilder(uriBase);
 
+        try {
             // Request parameters. All of them are optional.
-            builder.setParameter("returnFaceId", "true");
-            builder.setParameter("returnFaceLandmarks", "false");
-            builder.setParameter("returnFaceAttributes", faceAttributes);
- 
-            // Prepare the URI for the REST API call.
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("returnFaceId", "true");
+            parameters.put("returnFaceLandmarks","false");
+            parameters.put("returnFaceAttributes", faceAttributes);
+
+            con.setDoOutput(true);
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.writeBytes(getParamsString(parameters));
 
             // Request headers.
-            request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
 
             // Request body.
-            StringEntity reqEntity = new StringEntity(imageWithFaces);
-            request.setEntity(reqEntity);
+            byte[] outputInBytes = imageWithFaces.getBytes("UTF-8");
+            OutputStream os = con.getOutputStream();
+            os.write(outputInBytes);
+            os.close();
 
             // Execute the REST API call and get the response entity.
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
+//            HttpResponse response = httpclient.execute(request);
+//            HttpEntity entity = response.getEntity();
 
-            if (entity != null)
-            {
+
+            if (os != null) {
                 // Format and display the JSON response.
-                System.out.println("REST Response:\n");
+                System.out.println("JIHOON REST Response:\n");
 
-                String jsonString = EntityUtils.toString(entity).trim();
+
+                String jsonString = OutputStream.tgit oString(os).trim();
                 if (jsonString.charAt(0) == '[') {
                     JSONArray jsonArray = new JSONArray(jsonString);
                     System.out.println(jsonArray.toString(2));
-                }
-                else if (jsonString.charAt(0) == '{') {
+                } else if (jsonString.charAt(0) == '{') {
                     JSONObject jsonObject = new JSONObject(jsonString);
                     System.out.println(jsonObject.toString(2));
                 } else {
                     System.out.println(jsonString);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             // Display error message.
             System.out.println(e.getMessage());
         }
+    }
+
+    public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+            result.append("&");
+        }
+
+        String resultString = result.toString();
+        return resultString.length() > 0
+                ? resultString.substring(0, resultString.length() - 1)
+                : resultString;
     }
 }
