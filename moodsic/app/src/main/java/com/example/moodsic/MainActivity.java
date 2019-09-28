@@ -37,6 +37,21 @@ public class MainActivity extends AppCompatActivity {
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Your directory with files to be deleted
+                String sdcard = Environment.getExternalStorageDirectory() + "/Android/data/com.example.moodsic/files/Pictures/";
+                // go to your directory
+                File fileList = new File( sdcard );
+                //check if dir is not null
+                if (fileList != null){
+                    // so we can list all files
+                    File[] filenames = fileList.listFiles();
+                    // loop through each file and delete
+                    for (File tmpf : filenames){
+                        System.out.println("REACHED");
+                        System.out.println(tmpf);
+                        tmpf.delete();
+                    }
+                }
                 dispatchTakePictureIntent();
             }
         });
