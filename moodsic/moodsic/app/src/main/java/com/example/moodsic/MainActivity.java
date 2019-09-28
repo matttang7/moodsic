@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("JIHOON REST Response:\n");
 
 
-                String jsonString = OutputStream.tgit oString(os).trim();
+                String jsonString = OutputStream.toString(os).trim();
                 if (jsonString.charAt(0) == '[') {
                     JSONArray jsonArray = new JSONArray(jsonString);
                     System.out.println(jsonArray.toString(2));
