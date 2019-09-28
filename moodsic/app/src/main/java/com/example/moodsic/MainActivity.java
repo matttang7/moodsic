@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,11 +42,12 @@ import com.microsoft.projectoxford.face.contract.*;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.happysong);
+        mediaPlayer.start();
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -61,8 +63,27 @@ public class MainActivity extends AppCompatActivity {
         final Button sad = findViewById(R.id.btn_sad);
         final Button angry = findViewById(R.id.btn_angry);
         final Button worried = findViewById(R.id.btn_worried);
-
+        final Button pause = findViewById(R.id.pause);
         final Button picture = findViewById(R.id.picture);
+<<<<<<< HEAD
+=======
+        final int[] length = {0};
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    pause.setText("play");
+                }
+                else if(!mediaPlayer.isPlaying()) {
+                    length[0] = mediaPlayer.getCurrentPosition();
+                    mediaPlayer.seekTo(length[0]);
+                    mediaPlayer.start();
+                    pause.setText("pause");
+                }
+            }
+        });
+>>>>>>> 708a8b53b92b94f6f3aa2ce5668053ea89215e55
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
