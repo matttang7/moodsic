@@ -44,6 +44,7 @@ import com.microsoft.projectoxford.face.contract.*;
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         setContentView(R.layout.activity_main);
 
 
@@ -66,8 +66,12 @@ public class MainActivity extends AppCompatActivity {
         final Button worried = findViewById(R.id.btn_worried);
         final Button pause = findViewById(R.id.pause);
         final Button picture = findViewById(R.id.picture);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1a8d854c6fcc451fb36255c68cdac8e16a6dd040
         final int[] length = {0};
+        String s = getEmotion();
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -252,11 +256,22 @@ public class MainActivity extends AppCompatActivity {
 
         final String faceAttributes =
                 "emotion";
+<<<<<<< HEAD
+=======
+        System.out.println("CALLED");
+
+
+
+
+>>>>>>> 1a8d854c6fcc451fb36255c68cdac8e16a6dd040
 
         try {
 
             URL url = new URL(uriBase);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            System.out.println("REACHED url");
+            System.out.println(con);
+            System.out.println(url);
             con.setRequestMethod("POST");
 
             // Request parameters. All of them are optional.
@@ -265,20 +280,31 @@ public class MainActivity extends AppCompatActivity {
             parameters.put("returnFaceLandmarks","false");
             parameters.put("returnFaceAttributes", faceAttributes);
 
+<<<<<<< HEAD
             Log.d("JIHOON", "con = " + con);
 
             con.setDoOutput(true);
 
+=======
+            System.out.println("REACHED 1");
+            con.setDoOutput(true);
+            System.out.println(con.getOutputStream());
+>>>>>>> 1a8d854c6fcc451fb36255c68cdac8e16a6dd040
             DataOutputStream out = new DataOutputStream(con.getOutputStream());
             out.writeBytes(getParamsString(parameters));
-
+            System.out.println("REACHED 2");
             // Request headers.
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
-
+            System.out.println("REACHED 3");
             // Request body.
             byte[] outputInBytes = imageWithFaces.getBytes("UTF-8");
+<<<<<<< HEAD
             System.out.println(con);
+=======
+            System.out.println("REACHED CON");
+            //system.out.println(con);
+>>>>>>> 1a8d854c6fcc451fb36255c68cdac8e16a6dd040
             OutputStream os = con.getOutputStream();
             os.write(outputInBytes);
             os.close();
@@ -293,9 +319,12 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("JIHOON REST Response:\n");
 
                 ByteArrayOutputStream baos = (ByteArrayOutputStream)os;
+                System.out.println("jsonstring");
                 String jsonString = new String(baos.toByteArray()).trim();
+                System.out.println(jsonString);
                 JSONObject reader = new JSONObject(jsonString);
                 double anger = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("anger");
+<<<<<<< HEAD
                 double fear = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("fear");
                 double happiness = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("happiness");
                 double sadness = reader.getJSONObject("faceAttribute").getJSONObject("emotion").getDouble("sadness");
@@ -316,6 +345,10 @@ public class MainActivity extends AppCompatActivity {
                 else return "sad";
 
 //                System.out.print(anger);
+=======
+                System.out.print("ANGER");
+                System.out.print(anger);
+>>>>>>> 1a8d854c6fcc451fb36255c68cdac8e16a6dd040
 //                if (jsonString.charAt(0) == '[') {
 //                    JSONArray jsonArray = new JSONArray(jsonString);
 //                    System.out.println(jsonArray.toString(2));
@@ -331,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             // Display error message.
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
 
         return "";

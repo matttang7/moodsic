@@ -26,8 +26,7 @@
         android:id="@+id/picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
+        android:layout_marginStart="60dp"
         android:gravity="center"
         android:text="Picture"
         android:textSize="18sp"
@@ -40,8 +39,7 @@
         android:id="@+id/pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="248dp"
-        android:layout_marginLeft="248dp"
+        android:layout_marginStart="236dp"
         android:gravity="center"
         android:text="Pause"
         android:textSize="18sp"
@@ -90,8 +88,8 @@
                     android:id="@+id/btn_happy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="@android:dimen/thumbnail_width"
-                    android:height="@android:dimen/thumbnail_width"
+                    android:width="150dp"
+                    android:height="150dp"
                     android:background="@android:color/holo_orange_dark"
                     android:text="Happy" />
 
@@ -99,8 +97,8 @@
                     android:id="@+id/btn_sad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="@android:dimen/thumbnail_width"
-                    android:height="@android:dimen/thumbnail_width"
+                    android:width="150dp"
+                    android:height="150dp"
                     android:background="@android:color/darker_gray"
                     android:text="Sad" />
 
@@ -116,8 +114,8 @@
                     android:id="@+id/btn_angry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="@android:dimen/thumbnail_width"
-                    android:height="@android:dimen/thumbnail_width"
+                    android:width="150dp"
+                    android:height="150dp"
                     android:background="@android:color/holo_red_light"
                     android:text="Angry" />
 
@@ -125,8 +123,8 @@
                     android:id="@+id/btn_worried"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="@android:dimen/thumbnail_width"
-                    android:height="@android:dimen/thumbnail_width"
+                    android:width="150dp"
+                    android:height="150dp"
                     android:background="@android:color/holo_purple"
                     android:text="Worried" />
             </LinearLayout>
